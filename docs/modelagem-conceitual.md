@@ -33,6 +33,53 @@ A modelagem conceitual foi utilizada para definir as entidades, os relacionament
 - Expedição
 - Inventário
 
-## Próximos Passos
-- Modelagem Lógica - Transformação do DER em tabelas com PK e FK
-- Modelagem Física - Criação das tabelas no Oracle
+## Atributos por Entidade
+
+### 1. FORNECEDOR
+- id_fornecedor - PK, único, obrigatório
+- nome_fornecedor - obrigatório, único
+
+### 2. PRODUTO
+- id_produto - PK, único, obrigatório
+- nome_produto - obrigatório
+- id_fornecedor - FK, obrigatório - liga com FORNECEDOR
+- rua - obrigatório, imutável após cadastro
+- qtd_por_caixa - informação, só consulta
+- qtd_por_fardo - informação, só consulta
+- qtd_por_palete - obrigatório - define quantos cabem em 1 endereço
+- estoque_minimo - obrigatório - quando atingir, gera Pedido
+
+### 3. FILIAL
+- id_filial - PK, único, obrigatório
+- nome_filial - obrigatório, único
+
+### 4. ENDEREÇO
+- id_endereco - PK, único, obrigatório
+- codigo_endereco - único, obrigatório - Ex: R01-E01
+- rua - obrigatório - Ex: Rua 1 - Cereais
+- status - obrigatório - LIVRE ou OCUPADO
+- id_produto - FK - qual produto está lá, se estiver OCUPADO
+
+### 5. PEDIDO
+- id_pedido - PK, único, obrigatório - funciona como NF
+- id_fornecedor - FK, obrigatório
+- data_pedido - obrigatório
+- status - obrigatório - ABERTO / RECEBIDO
+
+### 6. RECEBIMENTO
+- id_recebimento - PK, único, obrigatório - mesmo número do pedido
+- id_pedido - FK, obrigatório
+- data_recebimento - obrigatório
+- quantidade_recebida - obrigatório - sempre igual à do pedido
+
+### 7. EXPEDIÇÃO
+- id_expedicao - PK, único, obrigatório
+- id_filial - FK, obrigatório
+- data_expedicao - obrigatório
+- status - obrigatório - PEDIDO DA LOJA / SAÍDA
+
+### 8. INVENTÁRIO
+- id_inventario - PK, único, obrigatório
+- rua - obrigatório - qual rua vai contar
+- data_inventario - obrigatório
+- status - obrigatório - ABERTO / FECHADO
