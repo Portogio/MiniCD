@@ -83,3 +83,24 @@ A modelagem conceitual foi utilizada para definir as entidades, os relacionament
 - rua - obrigatório - qual rua vai contar
 - data_inventario - obrigatório
 - status - obrigatório - ABERTO / FECHADO
+
+## Cardinalidades Decididas
+
+- FORNECEDOR - PRODUTO = 1 - 1
+    - 1 fornecedor tem só 1 produto, 1 produto vem de só 1 fornecedor
+
+- PRODUTO - ENDEREÇO = 1 - N
+    - 1 produto pode estar em vários endereços, 1 endereço só tem 1 produto
+
+- PEDIDO - RECEBIMENTO = 1 - 1
+    - 1 pedido gera 1 recebimento, 1 recebimento vem de 1 pedido
+
+- FILIAL - EXPEDIÇÃO = 1 - N
+    - 1 filial pode receber várias expedições, 1 expedição vai pra 1 filial só
+    - FILIAL é lado escuro, só como destino, sem controle de venda ou estoque da filial
+
+- RECEBIMENTO - ENDEREÇO = 1 - N
+    - 1 recebimento pode gerar vários endereços, 1 endereço vem de 1 recebimento só
+
+- ENDEREÇO - INVENTÁRIO = N - N
+    - 1 inventário conta vários endereços, 1 endereço pode ser contado em vários inventários
